@@ -56,15 +56,15 @@
       font-weight:950;
     }
     .logo img{
-  width:90px;          /* größer */
-  height:48px;         /* proportional */
-  object-fit:contain;
-  display:block;
-  background:#fff;
-  border-radius:8px;
-  border:1px solid var(--line);
-  padding:6px;
-}
+      width:90px;
+      height:48px;
+      object-fit:contain;
+      display:block;
+      background:#fff;
+      border-radius:8px;
+      border:1px solid var(--line);
+      padding:6px;
+    }
 
     .logo small{display:block; color:var(--muted); font-weight:700}
     .topCta{
@@ -154,6 +154,10 @@
       color: var(--text);
       box-shadow:none;
     }
+    .btn:disabled{
+      opacity:.65;
+      cursor:not-allowed;
+    }
 
     .heroRight{display:grid; gap:14px;}
     .imgBox{
@@ -221,16 +225,30 @@
     .consent input{width:auto; margin-top:3px;}
     .fineprint{color:var(--muted); font-size:12px; margin-top:4px;}
 
+    .notice{
+      display:none;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.12);
+      background: var(--surface2);
+      color: var(--text);
+      font-weight:800;
+    }
+    .notice.ok{
+      border-color: rgba(34,168,91,.35);
+      background: rgba(34,168,91,.10);
+    }
+    .notice.err{
+      border-color: rgba(220,0,0,.25);
+      background: rgba(220,0,0,.07);
+    }
+
     footer{
       margin-top: 18px;
       text-align:center;
       color:var(--muted);
       font-size:12px;
     }
-	    .formCard { position: relative; }
-  form { position: relative; }
-  .btn { position: relative; z-index: 9999; pointer-events: auto; }
-  #formular, #formular * { pointer-events: auto; }
   </style>
 </head>
 
@@ -247,32 +265,32 @@
       </div>
       <div class="topCta">
         <span>📞 <a href="tel:+4915566518738" style="color:var(--text);text-decoration:none;font-weight:950;">0155 665 18 738</a></span>
-        <a href="#formular">BU-Vergleich anfragen →</a>
+        <a href="#formular">BU Vergleich anfragen</a>
       </div>
     </header>
 
     <section class="hero">
       <div class="card heroLeft">
-        <div class="badge">Kostenlos · 10–15 Minuten · Köln/Bonn/NRW</div>
+        <div class="badge">Kostenlos · 10 bis 15 Minuten · Köln/Bonn/NRW</div>
 
-        <h1>BU schützt Ihr Einkommen – speziell für Ingenieure & Architekten</h1>
+        <h1>BU schützt Ihr Einkommen – speziell für Ingenieure und Architekten</h1>
         <p class="sub">
-          Kostenloser BU-Vergleich: verständlich erklärt, auf Ihren Beruf abgestimmt – ohne Verpflichtung.
+          Kostenloser BU Vergleich: verständlich erklärt, auf Ihren Beruf abgestimmt, ohne Verpflichtung.
         </p>
 
         <ul>
-          <li><span class="tick">✓</span><span>Welche BU-Rente ist sinnvoll? (realistisch & passend)</span></li>
-          <li><span class="tick">✓</span><span>Wichtige BU-Klauseln einfach erklärt (ohne Fachchinesisch)</span></li>
-          <li><span class="tick">✓</span><span>Vergleich von Optionen – klare Empfehlung statt Zettelchaos</span></li>
-          <li><span class="tick">✓</span><span>Optional: Ersteinschätzung zur Gesundheitsprüfung (nicht im Formular)</span></li>
+          <li><span class="tick">✓</span><span>Welche BU Rente ist sinnvoll</span></li>
+          <li><span class="tick">✓</span><span>Wichtige BU Klauseln einfach erklärt</span></li>
+          <li><span class="tick">✓</span><span>Vergleich von Optionen, klare Empfehlung</span></li>
+          <li><span class="tick">✓</span><span>Optional: Ersteinschätzung zur Gesundheitsprüfung, nicht im Formular</span></li>
         </ul>
 
         <div class="ctaRow">
-          <a class="btn" href="#formular">Kostenlosen BU-Vergleich starten</a>
-          <a class="btn secondary" href="#ablauf">So läuft’s ab</a>
+          <a class="btn" href="#formular">Kostenlosen BU Vergleich starten</a>
+          <a class="btn secondary" href="#ablauf">So läuft es ab</a>
         </div>
 
-        <div class="fineprint">Hinweis: Keine Abschlussverpflichtung. Erstmal Klarheit & Orientierung.</div>
+        <div class="fineprint">Hinweis: Keine Abschlussverpflichtung. Erstmal Klarheit und Orientierung.</div>
       </div>
 
       <div class="heroRight">
@@ -281,9 +299,9 @@
         </div>
 
         <div class="panel">
-          <b>Wir sind für Sie da!</b>
-          <p>Unverbindlich anfragen – wir melden uns zeitnah für eine kurze BU-Ersteinschätzung.</p>
-          <a href="#formular">Jetzt BU-Vergleich starten →</a>
+          <b>Wir sind für Sie da</b>
+          <p>Unverbindlich anfragen. Wir melden uns zeitnah für eine kurze BU Ersteinschätzung.</p>
+          <a href="#formular">Jetzt BU Vergleich starten</a>
         </div>
       </div>
     </section>
@@ -291,13 +309,13 @@
     <section class="formWrap" id="ablauf">
       <div class="card formCard">
         <div class="formTitle">
-          <b>So läuft’s ab</b>
-          <span>klar & schnell</span>
+          <b>So läuft es ab</b>
+          <span>klar und schnell</span>
         </div>
         <div style="display:grid;gap:10px;margin-top:12px;color:var(--muted);font-weight:650;">
-          <div><b style="color:var(--text)">1) Anfrage</b> – kurze Kontaktdaten (unter 30 Sekunden)</div>
-          <div><b style="color:var(--text)">2) Kurzgespräch</b> – 10–15 Minuten, verständlich & strukturiert</div>
-          <div><b style="color:var(--text)">3) Vergleich</b> – klare Empfehlung + nächste Schritte (wenn Sie möchten)</div>
+          <div><b style="color:var(--text)">1) Anfrage</b> kurze Kontaktdaten</div>
+          <div><b style="color:var(--text)">2) Kurzgespräch</b> 10 bis 15 Minuten</div>
+          <div><b style="color:var(--text)">3) Vergleich</b> Empfehlung und nächste Schritte</div>
         </div>
       </div>
     </section>
@@ -305,39 +323,38 @@
     <section class="formWrap" id="formular">
       <div class="card formCard">
         <div class="formTitle">
-          <b>BU-Vergleich anfragen</b>
-          <span>DSGVO-konform · Rückmeldung zeitnah</span>
+          <b>BU Vergleich anfragen</b>
+          <span>Rückmeldung zeitnah</span>
         </div>
 
-        <!-- Redirect nach Absenden -->
-        <form action="https://bu-form-ing-arch.tehrani-farshid.workers.dev/submit" method="POST" novalidate>
+        <div id="notice" class="notice" role="status" aria-live="polite"></div>
 
-
-          <input type="hidden" name="landingpage" value="LP02 – BU Ingenieure & Architekten">
-	  <input type="hidden" name="zielgruppe" value="Ingenieure & Architekten">
-          <input type="hidden" name="anfrage" value="BU-Vergleich">
-          <input type="hidden" name="_subject" value="LP02 Ingenieure & Architekten | BU-Vergleich">
-
+        <form id="buForm" action="https://formspree.io/f/xkogldbd" method="POST">
+          <input type="hidden" name="landingpage" value="LP02 BU Ingenieure und Architekten">
+          <input type="hidden" name="zielgruppe" value="Ingenieure und Architekten">
+          <input type="hidden" name="anfrage" value="BU Vergleich">
+          <input type="hidden" name="_subject" value="LP02 Ingenieure und Architekten BU Vergleich">
+          <input type="hidden" name="_format" value="plain">
 
           <div class="row">
             <div>
-              <label>Name*</label>
-              <input name="name" required placeholder="Max Mustermann" />
+              <label for="name">Name*</label>
+              <input id="name" name="name" required placeholder="Max Mustermann" autocomplete="name" />
             </div>
             <div>
-              <label>Telefon*</label>
-              <input name="phone" required placeholder="+49 …" />
+              <label for="phone">Telefon*</label>
+              <input id="phone" name="phone" required placeholder="+49" autocomplete="tel" />
             </div>
           </div>
 
           <div class="row">
             <div>
-              <label>E-Mail*</label>
-              <input name="email" type="email" required placeholder="name@mail.de" />
+              <label for="email">E Mail*</label>
+              <input id="email" name="email" type="email" required placeholder="name@mail.de" autocomplete="email" />
             </div>
             <div>
-              <label>Beruf*</label>
-              <select name="profession" required>
+              <label for="profession">Beruf*</label>
+              <select id="profession" name="profession" required>
                 <option value="" selected disabled>Bitte auswählen</option>
                 <option value="Ingenieur">Ingenieur</option>
                 <option value="Architekt">Architekt</option>
@@ -345,19 +362,19 @@
             </div>
           </div>
 
-          <label class="consent">
-  <input type="checkbox" name="consent" required>
-  <span>
-    Ich willige ein, dass meine Angaben zur Kontaktaufnahme verarbeitet werden.
-    <a href="#" target="_blank">Datenschutzerklärung</a> gelesen.*
-  </span>
-</label>
+          <div class="consent">
+            <input id="consent" name="consent" type="checkbox" required />
+            <div>
+              Ich willige ein, dass meine Angaben zur Kontaktaufnahme verarbeitet werden.
+              <a href="#" style="font-weight:900; color:var(--brand3); text-decoration:none;">Datenschutzerklärung</a>
+              gelesen.*
+            </div>
+          </div>
 
-
-          <button class="btn" type="submit" onclick="alert('Klick geht');">BU Anfrage absenden</button>
+          <button id="submitBtn" class="btn" type="submit">BU Anfrage absenden</button>
 
           <div class="fineprint">
-            Transparenzhinweis: Tätigkeit als Versicherungsvertreter gemäß §34d GewO · HDI-Hauptvertretung.
+            Transparenzhinweis: Tätigkeit als Versicherungsvertreter gemäß §34d GewO. HDI Hauptvertretung.
           </div>
         </form>
       </div>
@@ -374,27 +391,57 @@
           <div><b style="color:var(--text)">HDI Hauptvertretung Farshid Tehrani</b></div>
           <div>Adresse: St. Augustiner Str. 133, 53225 Bonn Beuel</div>
           <div>Telefon: <a href="tel:+4915566518738" style="color:var(--brand3);font-weight:900;text-decoration:none;">0155 665 18 738</a></div>
-          <div>E-Mail: <a href="mailto:farshid.tehrani@hdi.de" style="color:var(--brand3);font-weight:900;text-decoration:none;">farshid.tehrani@hdi.de</a></div>
+          <div>E Mail: <a href="mailto:farshid.tehrani@hdi.de" style="color:var(--brand3);font-weight:900;text-decoration:none;">farshid.tehrani@hdi.de</a></div>
         </div>
       </div>
     </section>
 
     <footer>
-      Fokus: Berufsunfähigkeit (BU) für Ingenieure & Architekten · 1 Angebot → 1 Formular.
+      Fokus: Berufsunfähigkeit für Ingenieure und Architekten. 1 Angebot. 1 Formular.
     </footer>
 
   </div>
+
+  <script>
+    const form = document.getElementById("buForm");
+    const btn = document.getElementById("submitBtn");
+    const notice = document.getElementById("notice");
+
+    function showNotice(type, text) {
+      notice.className = "notice " + type;
+      notice.textContent = text;
+      notice.style.display = "block";
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      btn.disabled = true;
+      const originalText = btn.textContent;
+      btn.textContent = "Sende";
+
+      try {
+        const formData = new FormData(form);
+
+        const resp = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (resp.ok) {
+          showNotice("ok", "Danke. Ihre Anfrage wurde gesendet. Wir melden uns zeitnah.");
+          form.reset();
+        } else {
+          showNotice("err", "Fehler beim Senden. Bitte nochmal versuchen oder telefonisch melden.");
+        }
+      } catch (err) {
+        showNotice("err", "Netzwerkfehler. Bitte nochmal versuchen.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
