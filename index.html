@@ -400,46 +400,89 @@
       border-color:rgba(15,123,61,.35);
     }
 
-    .link-list a{
-      color:var(--brand3);
-      font-weight:900;
-      text-decoration:none;
+    .contactCompact{
+      background:rgba(255,255,255,.82);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      backdrop-filter:blur(8px);
     }
 
-    .contact-grid{
+    .contactCompactLeft{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:28px;
-      margin-top:16px;
+      gap:3px;
+      min-width:220px;
+    }
+
+    .contactCompactLeft b{
+      font-size:15px;
+      color:var(--text);
+    }
+
+    .contactCompactLeft span{
       color:var(--muted);
+      font-size:13px;
       font-weight:650;
-      align-items:start;
     }
 
-    .contact-col{
-      display:grid;
-      gap:12px;
+    .contactCompactActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
     }
 
-    .contact-label{
-      display:block;
-      font-size:12px;
+    .contactMiniBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(15,123,61,.22);
+      background:rgba(15,123,61,.05);
+      color:var(--brand3);
+      text-decoration:none;
+      font-weight:850;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    .contactMiniBtn:hover{
+      background:rgba(15,123,61,.10);
+    }
+
+    .contactMeta{
+      margin-top:10px;
+      text-align:center;
       color:var(--muted);
-      margin-bottom:2px;
-      font-weight:700;
-      letter-spacing:.2px;
+      font-size:11px;
+      line-height:1.6;
+    }
+
+    .contactMeta a{
+      color:var(--brand3);
+      text-decoration:none;
+      font-weight:800;
     }
 
     @media (max-width:700px){
-      .contact-grid{
-        grid-template-columns:1fr;
-        gap:18px;
+      .contactCompact{
+        align-items:flex-start;
+      }
+
+      .contactCompactActions{
+        width:100%;
       }
     }
   </style>
 
   <script>
-    /* HIER DEINE ECHTEN WERTE EINTRAGEN */
     const GOOGLE_ADS_ID = 'AW-DEINE_GOOGLE_ADS_ID';
     const GOOGLE_CONVERSION_LABEL = 'DEIN_CONVERSION_LABEL';
 
@@ -512,7 +555,7 @@
 
       if (banner) {
         if (!localStorage.getItem("cookieConsentMarketing")) {
-          banner.style.display = "block";
+          banner.style.display = "block"; banner.classList.add("show");
         } else if (hasConsent()) {
           loadGoogleAdsScript();
         }
@@ -522,14 +565,22 @@
         acceptBtn.addEventListener("click", () => {
           setConsent(true);
           applyConsentAfterChoice();
-          banner.style.display = "none";
+          banner.style.display = "none"; banner.classList.remove("show");
         });
       }
 
       if (declineBtn && banner) {
         declineBtn.addEventListener("click", () => {
           setConsent(false);
-          banner.style.display = "none";
+          banner.style.display = "none"; banner.classList.remove("show");
+        });
+      }
+
+      const resetCookieLink = document.getElementById("resetCookieSettingsLink");
+      if (resetCookieLink) {
+        resetCookieLink.addEventListener("click", (event) => {
+          event.preventDefault();
+          resetCookieSettings();
         });
       }
 
@@ -544,6 +595,56 @@
       }
     });
   </script>
+
+<style>
+/* CONTACT FINAL CLEAN */
+.contact-section{padding:14px 0 0; position:relative; z-index:5;}
+.contact-box{width:100%;max-width:none;margin:0;background:#f1f4f2;border-radius:18px;padding:25px;}
+.contact-card{background:#fff;border-radius:14px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;border:1px solid rgba(0,0,0,.08);}
+.contact-left{font-size:15px;}
+.contact-left strong{display:block;font-size:16px;font-weight:600;margin-bottom:2px;}
+.contact-left span{color:#54665c;font-size:14.5px;}
+.contact-phone{margin-top:6px;font-size:14.5px;}
+.contact-phone b{color:#0f7b3d;font-weight:600;}
+.contact-right{display:flex;gap:20px;font-size:14.5px;}
+.contact-right a{text-decoration:none;color:#0f7b3d;font-weight:500;}
+.contact-meta{text-align:center;margin-top:16px;font-size:12.5px;color:#6b7c72;line-height:1.4;}
+.contact-meta a{color:#0f7b3d;text-decoration:none;}
+.contact-copy{text-align:center;margin-top:12px;font-size:12px;color:#7a8a80;}
+@media (max-width:700px){
+  .contact-card{flex-direction:column;align-items:flex-start;gap:10px;}
+  .contact-right{gap:15px;}
+}
+</style>
+
+<style>
+
+/* CLICK FIX */
+.contact-section,
+.contact-box,
+.contact-card,
+.contact-meta,
+.contact-copy{
+  position:relative;
+  z-index:50;
+}
+
+.contact-right a,
+.contact-meta a{
+  position:relative;
+  z-index:60;
+  pointer-events:auto;
+}
+
+.cookieBanner{
+  pointer-events:none;
+}
+
+.cookieBanner.show{
+  pointer-events:auto;
+}
+
+</style>
 </head>
 
 <body>
@@ -684,64 +785,41 @@
       </div>
     </section>
 
-    <section class="formWrap">
-      <div class="card formCard">
-        <div class="formTitle">
-          <b>Kontakt</b>
-          <span>Deutschlandweit</span>
-        </div>
+    
 
-        <div class="link-list contact-grid">
+    
+  
 
-          <div class="contact-col">
-            <div>
-              <b style="color:var(--text)">HDI Hauptvertretung Farshid Tehrani</b>
-            </div>
-
-            <div>
-              <span class="contact-label">Adresse</span>
-              <span>St. Augustiner Str. 133, 53225 Bonn</span>
-            </div>
-
-            <div>
-              <span class="contact-label">Telefon</span>
-              <a href="tel:+4915566518738">0155 665 18 738</a>
-            </div>
-
-            <div>
-              <span class="contact-label">E-Mail</span>
-              <a href="mailto:farshid.tehrani@hdi.de">farshid.tehrani@hdi.de</a>
-            </div>
-          </div>
-
-          <div class="contact-col">
-            <div>
-              <a href="impressum.html">Impressum</a>
-            </div>
-
-            <div>
-              <a href="datenschutz.html">Datenschutzerklärung</a>
-            </div>
-
-            <div>
-              <a href="#" onclick="resetCookieSettings(); return false;">Cookie-Einstellungen zurücksetzen</a>
-            </div>
-
-            <div style="margin-top:6px;font-size:12px;line-height:1.5;color:var(--muted);">
-              Versicherungsvertreter gemäß §34d Abs. 1 GewO<br>
-              Registriert im Vermittlerregister der Deutschen Industrie- und Handelskammer (DIHK)<br>
-              Registrierungsnummer: <strong>D-HQ16-9MJZU-08</strong><br>
-              <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer">www.vermittlerregister.info</a>
-            </div>
-          </div>
-
+<section class="contact-section">
+  <div class="contact-box">
+    <div class="contact-card">
+      <div class="contact-left">
+        <strong>HDI Hauptvertretung Farshid Tehrani</strong>
+        <span>Deutschlandweit · Bonn</span>
+        <div class="contact-phone">
+          Telefon <b>0155 665 18 738</b>
         </div>
       </div>
-    </section>
+      <div class="contact-right">
+        <a href="mailto:farshid.tehrani@hdi.de">E-Mail</a>
+        <a href="./impressum.html">Impressum</a>
+        <a href="./datenschutz.html" id="footerPrivacyLink">Datenschutz</a>
+      </div>
+    </div>
 
-    <footer>
+    <div class="contact-meta">
+      St. Augustiner Str. 133, 53225 Bonn · Versicherungsvertreter gemäß §34d Abs. 1 GewO<br>
+      Registriert im Vermittlerregister der DIHK · Registrierungsnummer: D-HQ16-9MJZU-08<br><br>
+      <a href="https://www.vermittlerregister.info/" target="_blank" rel="noopener noreferrer">vermittlerregister.info</a> · 
+      <a href="#" id="resetCookieSettingsLink">Cookie-Einstellungen zurücksetzen</a>
+    </div>
+
+    <div class="contact-copy">
       © HDI Hauptvertretung Farshid Tehrani
-    </footer>
+    </div>
+  </div>
+</section>
+
   </div>
 
   <div class="cookieBanner" id="cookieBanner">
@@ -756,5 +834,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
