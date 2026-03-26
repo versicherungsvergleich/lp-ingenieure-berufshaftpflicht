@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BU Landingpage – Ingenieure & Architekten</title>
-
   <meta name="description" content="Kostenloser BU Vergleich für Ingenieure und Architekten. Kurzgespräch 10 bis 15 Minuten. Unverbindlich anfragen." />
 
   <style>
@@ -155,12 +154,6 @@
       line-height:1.12;
     }
 
-    .sub{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:16px;
-    }
-
     ul{
       padding:0;
       margin:0;
@@ -212,12 +205,6 @@
       cursor:pointer;
     }
 
-    .btn.secondary{
-      background:var(--surface2);
-      color:var(--text);
-      box-shadow:none;
-    }
-
     .btn:disabled{
       opacity:.65;
       cursor:not-allowed;
@@ -261,18 +248,6 @@
       margin:0;
       color:color-mix(in srgb, var(--text) 70%, #000 30%);
       font-weight:650;
-    }
-
-    .panel a{
-      display:inline-flex;
-      margin-top:10px;
-      color:var(--brand3);
-      font-weight:950;
-      text-decoration:none;
-    }
-
-    .panel a:hover{
-      text-decoration:underline;
     }
 
     .formWrap{
@@ -424,6 +399,12 @@
       color:#fff;
       border-color:rgba(15,123,61,.35);
     }
+
+    .link-list a{
+      color:var(--brand3);
+      font-weight:900;
+      text-decoration:none;
+    }
   </style>
 
   <script>
@@ -458,6 +439,11 @@
 
     function setConsent(value) {
       localStorage.setItem("cookieConsentMarketing", value ? "yes" : "no");
+    }
+
+    function resetCookieSettings() {
+      localStorage.removeItem("cookieConsentMarketing");
+      location.reload();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -541,7 +527,7 @@
         <div style="height:22px;"></div>
 
         <ul>
-          <li><span class="tick">✓</span><span>Welche BU Rente wirklich sinnvoll ist</span></li>
+          <li><span class="tick">✓</span><span>Welche BU-Rente wirklich sinnvoll ist</span></li>
           <li><span class="tick">✓</span><span>Auf Ihren Beruf individuell abgestimmt</span></li>
           <li><span class="tick">✓</span><span>Klare Empfehlung statt unübersichtlicher Tarifauswahl</span></li>
           <li><span class="tick">✓</span><span>Optional: Ersteinschätzung zur Gesundheitsprüfung außerhalb des Formulars</span></li>
@@ -625,7 +611,7 @@
           <div class="consent">
             <input id="consent" name="consent" type="checkbox" required />
             <div>
-              Ich willige ein, dass meine Angaben zur Kontaktaufnahme verarbeitet werden.
+              Ich willige ein, dass meine Angaben zur Bearbeitung meiner Anfrage sowie zur Kontaktaufnahme und Beratung verarbeitet werden.
               <a href="datenschutz.html" style="font-weight:900;color:var(--brand3);text-decoration:none;" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>
               gelesen.*
             </div>
@@ -634,7 +620,7 @@
           <button class="btn" type="submit">BU Anfrage absenden</button>
 
           <div class="fineprint">
-            Transparenzhinweis: Tätigkeit als Versicherungsvertreter gemäß §34d GewO. HDI Hauptvertretung.
+            Transparenzhinweis: Tätigkeit als Versicherungsvertreter gemäß §34d Abs. 1 GewO.
           </div>
         </form>
       </div>
@@ -647,36 +633,37 @@
           <span>Deutschlandweit</span>
         </div>
 
-        <div style="display:grid;gap:8px;margin-top:12px;color:var(--muted);font-weight:650;">
+        <div class="link-list" style="display:grid;gap:8px;margin-top:12px;color:var(--muted);font-weight:650;">
           <div><b style="color:var(--text)">HDI Hauptvertretung Farshid Tehrani</b></div>
           <div>Adresse: St. Augustiner Str. 133, 53225 Bonn</div>
+
           <div>
             Telefon:
-            <a href="tel:+4915566518738" style="color:var(--brand3);font-weight:900;text-decoration:none;">
-              0155 665 18 738
-            </a>
+            <a href="tel:+4915566518738">0155 665 18 738</a>
+          </div>
+
+          <div>
+            E-Mail:
+            <a href="mailto:farshid.tehrani@hdi.de">farshid.tehrani@hdi.de</a>
           </div>
 
           <div style="margin-top:6px;">
-            <a
-              href="https://www.hdi.de/betreuer/agentur-tehrani/impressum"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="color:var(--brand3);font-weight:900;text-decoration:none;"
-            >
-              Impressum
-            </a>
+            <a href="impressum.html">Impressum</a>
           </div>
 
           <div>
-            <a
-              href="datenschutz.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="color:var(--brand3);font-weight:900;text-decoration:none;"
-            >
-              Datenschutzerklärung
-            </a>
+            <a href="datenschutz.html">Datenschutzerklärung</a>
+          </div>
+
+          <div>
+            <a href="#" onclick="resetCookieSettings(); return false;">Cookie-Einstellungen zurücksetzen</a>
+          </div>
+
+          <div style="margin-top:10px;font-size:12px;line-height:1.4;color:var(--muted);">
+            Versicherungsvertreter gemäß §34d Abs. 1 GewO<br>
+            Registriert im Vermittlerregister der Deutschen Industrie- und Handelskammer (DIHK)<br>
+            Registrierungsnummer: <strong>D-HQ16-9MJZU-08</strong><br>
+            <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer">www.vermittlerregister.info</a>
           </div>
         </div>
       </div>
@@ -691,7 +678,7 @@
   <div class="cookieBanner" id="cookieBanner">
     <div class="cookieRow">
       <div class="cookieText">
-        Diese Website verwendet optionale Marketing-Technologien, um die Nutzung der Seite zu analysieren und Werbemaßnahmen zu verbessern. Details finden Sie in der
+        Diese Website verwendet optionale Marketing-Technologien (z. B. Meta Pixel), um die Nutzung der Seite zu analysieren und Werbemaßnahmen zu verbessern. Diese Technologien werden nur mit Ihrer Einwilligung aktiviert. Details finden Sie in der
         <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>.
       </div>
       <div class="cookieActions">
