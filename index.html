@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BU Landingpage – Ingenieure & Architekten</title>
-  <meta name="description" content="Kostenloser BU Angebot für Ingenieure und Architekten. Kurzgespräch 10 bis 15 Minuten. Unverbindlich anfragen." />
+  <meta name="description" content="Kostenloses BU-Angebot für Ingenieure und Architekten. Kurzgespräch 10 bis 15 Minuten. Unverbindlich anfragen." />
 
   <style>
     :root{
@@ -21,6 +21,8 @@
       --brand:#0f7b3d;
       --brand2:#22a85b;
       --brand3:#0b5e2f;
+      --danger:#b42318;
+      --success:#0f7b3d;
 
       --shadow:0 14px 30px rgba(0,0,0,.08);
       --radius:18px;
@@ -334,6 +336,30 @@
       margin-top:4px;
     }
 
+    .statusMessage{
+      display:none;
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      border:1px solid transparent;
+    }
+
+    .statusMessage.success{
+      display:block;
+      color:var(--success);
+      background:rgba(15,123,61,.08);
+      border-color:rgba(15,123,61,.18);
+    }
+
+    .statusMessage.error{
+      display:block;
+      color:var(--danger);
+      background:rgba(180,35,24,.07);
+      border-color:rgba(180,35,24,.18);
+    }
+
     footer{
       margin-top:18px;
       text-align:center;
@@ -355,6 +381,10 @@
       padding:14px;
       display:none;
       z-index:9999;
+    }
+
+    .cookieBanner.show{
+      display:block;
     }
 
     .cookieRow{
@@ -400,85 +430,57 @@
       border-color:rgba(15,123,61,.35);
     }
 
-    .contactCompact{
-      background:rgba(255,255,255,.82);
-      border:1px solid var(--line);
-      border-radius:16px;
-      box-shadow:var(--shadow);
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-      backdrop-filter:blur(8px);
+    .contact-section{padding:14px 0 0; position:relative; z-index:5;}
+    .contact-box{width:100%;max-width:none;margin:0;background:#f1f4f2;border-radius:18px;padding:25px;}
+    .contact-card{background:#fff;border-radius:14px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;border:1px solid rgba(0,0,0,.08);}
+    .contact-left{font-size:15px;}
+    .contact-left strong{display:block;font-size:16px;font-weight:600;margin-bottom:2px;}
+    .contact-left span{color:#54665c;font-size:14.5px;}
+    .contact-phone{margin-top:6px;font-size:14.5px;}
+    .contact-phone b{color:#0f7b3d;font-weight:600;}
+    .contact-right{display:flex;gap:20px;font-size:14.5px;}
+    .contact-right a{text-decoration:none;color:#0f7b3d;font-weight:500;}
+    .contact-meta{text-align:center;margin-top:16px;font-size:12.5px;color:#6b7c72;line-height:1.5;}
+    .contact-meta a{color:#0f7b3d;text-decoration:none;}
+    .contact-copy{text-align:center;margin-top:12px;font-size:12px;color:#7a8a80;}
+
+    .contact-section,
+    .contact-box,
+    .contact-card,
+    .contact-meta,
+    .contact-copy{
+      position:relative;
+      z-index:50;
     }
 
-    .contactCompactLeft{
-      display:grid;
-      gap:3px;
-      min-width:220px;
+    .contact-right a,
+    .contact-meta a{
+      position:relative;
+      z-index:60;
+      pointer-events:auto;
     }
 
-    .contactCompactLeft b{
-      font-size:15px;
-      color:var(--text);
+    .cookieBanner{
+      pointer-events:none;
     }
 
-    .contactCompactLeft span{
-      color:var(--muted);
-      font-size:13px;
-      font-weight:650;
+    .cookieBanner.show{
+      pointer-events:auto;
     }
 
-    .contactCompactActions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .contactMiniBtn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid rgba(15,123,61,.22);
-      background:rgba(15,123,61,.05);
-      color:var(--brand3);
-      text-decoration:none;
-      font-weight:850;
-      font-size:13px;
-      white-space:nowrap;
-    }
-
-    .contactMiniBtn:hover{
-      background:rgba(15,123,61,.10);
-    }
-
-    .contactMeta{
-      margin-top:10px;
-      text-align:center;
-      color:var(--muted);
-      font-size:11px;
-      line-height:1.6;
-    }
-
-    .contactMeta a{
-      color:var(--brand3);
-      text-decoration:none;
-      font-weight:800;
+    .hidden-field{
+      position:absolute !important;
+      left:-9999px !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+      height:0 !important;
+      width:0 !important;
+      overflow:hidden !important;
     }
 
     @media (max-width:700px){
-      .contactCompact{
-        align-items:flex-start;
-      }
-
-      .contactCompactActions{
-        width:100%;
-      }
+      .contact-card{flex-direction:column;align-items:flex-start;gap:10px;}
+      .contact-right{gap:15px;}
     }
   </style>
 
@@ -494,7 +496,21 @@
     let googleAdsScriptLoading = false;
 
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
+
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+
+    function hasConsent() {
+      return localStorage.getItem('cookieConsentMarketing') === 'yes';
+    }
+
+    function setConsent(value) {
+      localStorage.setItem('cookieConsentMarketing', value ? 'yes' : 'no');
+    }
 
     function loadGoogleAdsScript() {
       if (!GOOGLE_ADS_READY || googleAdsInitialized || googleAdsScriptLoading) return;
@@ -512,11 +528,13 @@
         gtag('js', new Date());
         gtag('config', GOOGLE_ADS_ID);
 
-        gtag('consent', 'update', {
-          ad_storage: 'granted',
-          ad_user_data: 'granted',
-          ad_personalization: 'granted'
-        });
+        if (hasConsent()) {
+          gtag('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+        }
       };
 
       script.onerror = () => {
@@ -526,125 +544,162 @@
       document.head.appendChild(script);
     }
 
-    function hasConsent() {
-      return localStorage.getItem("cookieConsentMarketing") === "yes";
-    }
-
-    function setConsent(value) {
-      localStorage.setItem("cookieConsentMarketing", value ? "yes" : "no");
-    }
-
     function applyConsentAfterChoice() {
       if (!GOOGLE_ADS_READY) return;
 
       if (hasConsent()) {
         loadGoogleAdsScript();
+
+        gtag('consent', 'update', {
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted'
+        });
+      } else {
+        gtag('consent', 'update', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        });
       }
     }
 
     function resetCookieSettings() {
-      localStorage.removeItem("cookieConsentMarketing");
+      localStorage.removeItem('cookieConsentMarketing');
       location.reload();
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const banner = document.getElementById("cookieBanner");
-      const acceptBtn = document.getElementById("cookieAccept");
-      const declineBtn = document.getElementById("cookieDecline");
-      const form = document.getElementById("buForm");
+    function isValidPhone(phone) {
+      const cleaned = phone.replace(/[^\d+]/g, '');
+      return cleaned.length >= 7;
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.getElementById('cookieBanner');
+      const acceptBtn = document.getElementById('cookieAccept');
+      const declineBtn = document.getElementById('cookieDecline');
+      const resetCookieLink = document.getElementById('resetCookieSettingsLink');
+
+      const form = document.getElementById('buForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const formStatus = document.getElementById('formStatus');
 
       if (banner) {
-        if (!localStorage.getItem("cookieConsentMarketing")) {
-          banner.style.display = "block"; banner.classList.add("show");
+        if (!localStorage.getItem('cookieConsentMarketing')) {
+          banner.classList.add('show');
         } else if (hasConsent()) {
-          loadGoogleAdsScript();
+          applyConsentAfterChoice();
         }
       }
 
       if (acceptBtn && banner) {
-        acceptBtn.addEventListener("click", () => {
+        acceptBtn.addEventListener('click', () => {
           setConsent(true);
           applyConsentAfterChoice();
-          banner.style.display = "none"; banner.classList.remove("show");
+          banner.classList.remove('show');
         });
       }
 
       if (declineBtn && banner) {
-        declineBtn.addEventListener("click", () => {
+        declineBtn.addEventListener('click', () => {
           setConsent(false);
-          banner.style.display = "none"; banner.classList.remove("show");
+          applyConsentAfterChoice();
+          banner.classList.remove('show');
         });
       }
 
-      const resetCookieLink = document.getElementById("resetCookieSettingsLink");
       if (resetCookieLink) {
-        resetCookieLink.addEventListener("click", (event) => {
+        resetCookieLink.addEventListener('click', (event) => {
           event.preventDefault();
           resetCookieSettings();
         });
       }
 
-      if (form) {
-        form.addEventListener("submit", () => {
-          if (GOOGLE_ADS_READY && hasConsent() && googleAdsInitialized) {
+      if (!form) return;
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        formStatus.className = 'statusMessage';
+        formStatus.textContent = '';
+
+        const name = form.querySelector('#name').value.trim();
+        const phone = form.querySelector('#phone').value.trim();
+        const email = form.querySelector('#email').value.trim();
+        const profession = form.querySelector('#profession').value;
+        const honeypot = form.querySelector('#website').value.trim();
+        const consent = form.querySelector('#consent').checked;
+
+        if (honeypot !== '') {
+          formStatus.className = 'statusMessage error';
+          formStatus.textContent = 'Die Anfrage konnte nicht gesendet werden.';
+          return;
+        }
+
+        if (!name || !phone || !email || !profession || !consent) {
+          formStatus.className = 'statusMessage error';
+          formStatus.textContent = 'Bitte füllen Sie alle Pflichtfelder vollständig aus.';
+          return;
+        }
+
+        if (!isValidPhone(phone)) {
+          formStatus.className = 'statusMessage error';
+          formStatus.textContent = 'Bitte geben Sie eine gültige Telefonnummer ein.';
+          return;
+        }
+
+        if (!isValidEmail(email)) {
+          formStatus.className = 'statusMessage error';
+          formStatus.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Wird gesendet...';
+
+        try {
+          const formData = new FormData(form);
+
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (!response.ok) {
+            throw new Error('Formularversand fehlgeschlagen');
+          }
+
+          form.reset();
+
+          formStatus.className = 'statusMessage success';
+          formStatus.textContent = 'Vielen Dank. Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns zeitnah bei Ihnen.';
+
+          if (GOOGLE_ADS_READY && hasConsent()) {
+            if (!googleAdsInitialized) {
+              loadGoogleAdsScript();
+            }
+
             gtag('event', 'conversion', {
-              'send_to': GOOGLE_ADS_ID + '/' + GOOGLE_CONVERSION_LABEL
+              send_to: GOOGLE_ADS_ID + '/' + GOOGLE_CONVERSION_LABEL
             });
           }
-        });
-      }
+        } catch (error) {
+          formStatus.className = 'statusMessage error';
+          formStatus.textContent = 'Beim Versand ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon oder E-Mail.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'BU Anfrage absenden';
+        }
+      });
     });
   </script>
-
-<style>
-/* CONTACT FINAL CLEAN */
-.contact-section{padding:14px 0 0; position:relative; z-index:5;}
-.contact-box{width:100%;max-width:none;margin:0;background:#f1f4f2;border-radius:18px;padding:25px;}
-.contact-card{background:#fff;border-radius:14px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;border:1px solid rgba(0,0,0,.08);}
-.contact-left{font-size:15px;}
-.contact-left strong{display:block;font-size:16px;font-weight:600;margin-bottom:2px;}
-.contact-left span{color:#54665c;font-size:14.5px;}
-.contact-phone{margin-top:6px;font-size:14.5px;}
-.contact-phone b{color:#0f7b3d;font-weight:600;}
-.contact-right{display:flex;gap:20px;font-size:14.5px;}
-.contact-right a{text-decoration:none;color:#0f7b3d;font-weight:500;}
-.contact-meta{text-align:center;margin-top:16px;font-size:12.5px;color:#6b7c72;line-height:1.4;}
-.contact-meta a{color:#0f7b3d;text-decoration:none;}
-.contact-copy{text-align:center;margin-top:12px;font-size:12px;color:#7a8a80;}
-@media (max-width:700px){
-  .contact-card{flex-direction:column;align-items:flex-start;gap:10px;}
-  .contact-right{gap:15px;}
-}
-</style>
-
-<style>
-
-/* CLICK FIX */
-.contact-section,
-.contact-box,
-.contact-card,
-.contact-meta,
-.contact-copy{
-  position:relative;
-  z-index:50;
-}
-
-.contact-right a,
-.contact-meta a{
-  position:relative;
-  z-index:60;
-  pointer-events:auto;
-}
-
-.cookieBanner{
-  pointer-events:none;
-}
-
-.cookieBanner.show{
-  pointer-events:auto;
-}
-
-</style>
 </head>
 
 <body>
@@ -736,10 +791,15 @@
           <span>Rückmeldung zeitnah</span>
         </div>
 
-        <form id="buForm" action="https://formspree.io/f/xkogldbd" method="POST">
+        <form id="buForm" action="https://formspree.io/f/xkogldbd" method="POST" novalidate>
           <input type="hidden" name="landingpage" value="LP02 BU Ingenieure und Architekten" />
           <input type="hidden" name="zielgruppe" value="Ingenieure und Architekten" />
           <input type="hidden" name="anfrage" value="BU Angebot" />
+
+          <div class="hidden-field" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
 
           <div class="row">
             <div>
@@ -770,55 +830,53 @@
           <div class="consent">
             <input id="consent" name="consent" type="checkbox" required />
             <div>
-              Ich willige ein, dass meine Angaben zur Bearbeitung meiner Anfrage sowie zur Kontaktaufnahme und Beratung verarbeitet werden.
+              Ich willige ein, dass meine Angaben zur Bearbeitung meiner Anfrage, zur Kontaktaufnahme (auch telefonisch) sowie zur Beratung zu Versicherungsprodukten verarbeitet werden.
               <a href="datenschutz.html" style="font-weight:900;color:var(--brand3);text-decoration:none;" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>
               gelesen.*
             </div>
           </div>
 
-          <button class="btn" type="submit">BU Anfrage absenden</button>
+          <button class="btn" id="submitBtn" type="submit">BU Anfrage absenden</button>
+
+          <div id="formStatus" class="statusMessage" role="status" aria-live="polite"></div>
 
           <div class="fineprint">
-            Transparenzhinweis: Tätigkeit als Versicherungsvertreter gemäß §34d Abs. 1 GewO.
+            Transparenzhinweis: Beratung erfolgt als Versicherungsvertreter der HDI Versicherung AG gemäß §34d Abs. 1 GewO.
           </div>
         </form>
       </div>
     </section>
 
-    
+    <section class="contact-section">
+      <div class="contact-box">
+        <div class="contact-card">
+          <div class="contact-left">
+            <strong>HDI Hauptvertretung Farshid Tehrani</strong>
+            <span>Deutschlandweit · Bonn</span>
+            <div class="contact-phone">
+              Telefon <b>0155 665 18 738</b>
+            </div>
+          </div>
+          <div class="contact-right">
+            <a href="mailto:farshid.tehrani@hdi.de">E-Mail</a>
+            <a href="./impressum.html">Impressum</a>
+            <a href="./datenschutz.html" id="footerPrivacyLink">Datenschutz</a>
+          </div>
+        </div>
 
-    
-  
+        <div class="contact-meta">
+          St. Augustiner Str. 133, 53225 Bonn · Versicherungsvertreter gemäß §34d Abs. 1 GewO<br>
+          Beratung erfolgt als Versicherungsvertreter der HDI Versicherung AG.<br>
+          Registriert im Vermittlerregister der DIHK · Registrierungsnummer: D-HQ16-9MJZU-08<br><br>
+          <a href="https://www.vermittlerregister.info/" target="_blank" rel="noopener noreferrer">vermittlerregister.info</a> ·
+          <a href="#" id="resetCookieSettingsLink">Cookie-Einstellungen zurücksetzen</a>
+        </div>
 
-<section class="contact-section">
-  <div class="contact-box">
-    <div class="contact-card">
-      <div class="contact-left">
-        <strong>HDI Hauptvertretung Farshid Tehrani</strong>
-        <span>Deutschlandweit · Bonn</span>
-        <div class="contact-phone">
-          Telefon <b>0155 665 18 738</b>
+        <div class="contact-copy">
+          © HDI Hauptvertretung Farshid Tehrani
         </div>
       </div>
-      <div class="contact-right">
-        <a href="mailto:farshid.tehrani@hdi.de">E-Mail</a>
-        <a href="./impressum.html">Impressum</a>
-        <a href="./datenschutz.html" id="footerPrivacyLink">Datenschutz</a>
-      </div>
-    </div>
-
-    <div class="contact-meta">
-      St. Augustiner Str. 133, 53225 Bonn · Versicherungsvertreter gemäß §34d Abs. 1 GewO<br>
-      Registriert im Vermittlerregister der DIHK · Registrierungsnummer: D-HQ16-9MJZU-08<br><br>
-      <a href="https://www.vermittlerregister.info/" target="_blank" rel="noopener noreferrer">vermittlerregister.info</a> · 
-      <a href="#" id="resetCookieSettingsLink">Cookie-Einstellungen zurücksetzen</a>
-    </div>
-
-    <div class="contact-copy">
-      © HDI Hauptvertretung Farshid Tehrani
-    </div>
-  </div>
-</section>
+    </section>
 
   </div>
 
