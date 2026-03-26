@@ -407,20 +407,36 @@
     }
   </style>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-DEINE_GOOGLE_ADS_ID"></script>
   <script>
+    /* HIER DEINE ECHTEN WERTE EINTRAGEN */
+    const GOOGLE_ADS_ID = 'AW-DEINE_GOOGLE_ADS_ID';
+    const GOOGLE_CONVERSION_LABEL = 'DEIN_CONVERSION_LABEL';
+
+    const GOOGLE_ADS_READY =
+      GOOGLE_ADS_ID !== 'AW-DEINE_GOOGLE_ADS_ID' &&
+      GOOGLE_CONVERSION_LABEL !== 'DEIN_CONVERSION_LABEL';
+
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
 
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied'
-    });
+    function initGoogleAds() {
+      if (!GOOGLE_ADS_READY) return;
 
-    gtag('js', new Date());
-    gtag('config', 'AW-DEINE_GOOGLE_ADS_ID');
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GOOGLE_ADS_ID);
+      document.head.appendChild(script);
+
+      gtag('js', new Date());
+      gtag('config', GOOGLE_ADS_ID);
+
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied'
+      });
+    }
 
     function hasConsent() {
       return localStorage.getItem("cookieConsentMarketing") === "yes";
@@ -431,6 +447,8 @@
     }
 
     function applyConsent() {
+      if (!GOOGLE_ADS_READY) return;
+
       if (hasConsent()) {
         gtag('consent', 'update', {
           ad_storage: 'granted',
@@ -454,6 +472,8 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+      initGoogleAds();
+
       const banner = document.getElementById("cookieBanner");
       const acceptBtn = document.getElementById("cookieAccept");
       const declineBtn = document.getElementById("cookieDecline");
@@ -485,9 +505,9 @@
 
       if (form) {
         form.addEventListener("submit", () => {
-          if (hasConsent()) {
+          if (GOOGLE_ADS_READY && hasConsent()) {
             gtag('event', 'conversion', {
-              'send_to': 'AW-DEINE_GOOGLE_ADS_ID/DEIN_CONVERSION_LABEL'
+              'send_to': GOOGLE_ADS_ID + '/' + GOOGLE_CONVERSION_LABEL
             });
           }
         });
